@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School Management System</title>
+    <style>
+        /* Main background: white, secondary: blue */
+        body {
+            font-family: Arial, sans-serif;
+            background: white; /* main color */
+            color: #1e3c72;    /* secondary color for text */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #1e3c72; /* secondary color for heading */
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background: #1e3c72; /* secondary color */
+            color: white;        /* main color for text */
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: white;       /* invert on hover */
+            color: #1e3c72;
+            transform: scale(1.1);
+            border: 2px solid #1e3c72;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Student Management System</h1>
+        <div class="card-container">
+            <a href="/student/login" class="card">Student Login</a>
+            <a href="/teacher/login" class="card">Teacher Login</a>
+        </div>
+    </div>
+</body>
+</html>

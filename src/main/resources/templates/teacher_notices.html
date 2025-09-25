@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Notices</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Teacher Panel</h2>
+    <a href="/teacher/dashboard">🏠 Dashboard</a>
+    <a href="/teacher/attendance">📅 Attendance</a>
+    <a href="/teacher/absent">❌ Absences</a>
+    <a href="/teacher/marks">📊 Marks</a>
+    <a href="/teacher/subjects">📘 Subjects</a>
+    <a href="/teacher/students">👨‍🎓 Students</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>Notices from Students</h2>
+        <p>View messages sent by students</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="notice : ${notices}">
+                    <td th:text="${notice.studentId}">STUD001</td>
+                    <td th:text="${notice.message}">Request for leave</td>
+                    <td th:text="${notice.date}">2025-09-21</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
