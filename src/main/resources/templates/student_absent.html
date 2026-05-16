@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Absences</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Student Panel</h2>
+    <a href="/student/dashboard">🏠 Dashboard</a>
+    <a href="/student/attendance/STUD0001">📅 Attendance</a>
+    <a href="/student/absent/STUD0001" class="active">❌ Absences</a>
+    <a href="/student/marks/STUD0001">📊 Marks</a>
+    <a href="/student/subjects">📘 Subjects</a>
+    <a href="/student/notice/STUD0001">✉ Notices</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>Your Absences</h2>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr><th>Date</th><th>Reason</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="abs : ${absentList}">
+                    <td th:text="${abs.date}">2025-09-10</td>
+                    <td th:text="${abs.reason}">Medical</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

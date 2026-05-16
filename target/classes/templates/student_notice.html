@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Notices</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Student Panel</h2>
+    <a href="/student/dashboard">🏠 Dashboard</a>
+    <a href="/student/attendance/STUD0001">📅 Attendance</a>
+    
+    <a href="/student/marks/STUD0001">📊 Marks</a>
+    <a href="/student/subjects">📘 Subjects</a>
+    
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>Notices</h2>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead><tr><th>Date</th><th>Notice</th></tr></thead>
+            <tbody>
+                <tr th:each="notice : ${noticeList}">
+                    <td th:text="${notice.date}">2025-09-21</td>
+                    <td th:text="${notice.message}">Exam on 25th Sep</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

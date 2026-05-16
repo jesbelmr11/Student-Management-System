@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Login</title>
+    <style>
+        /* Uniform box-sizing for all elements */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: white;       /* main color */
+            color: #1e3c72;          /* secondary color for text */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: #1e3c72;     /* secondary color for card */
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-align: center;
+            width: 320px;            /* fixed width for symmetry */
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #1e3c72;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-container input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 5px #2a5298;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: white;       /* main color */
+            color: #1e3c72;          /* secondary color text */
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: #1e3c72;     /* secondary color */
+            color: white;            /* main color text */
+            transform: scale(1.05);
+        }
+
+        .form-container p {
+            margin-top: 15px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .form-container a {
+            color: #ffd700;           /* optional accent color for links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        .form-container p[th\\:if] {
+            color: #ff4d4d;           /* red for error */
+            margin-bottom: 10px;
+        }
+
+        /* Responsive for small screens */
+        @media (max-width: 400px) {
+            .form-container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Teacher Login</h2>
+
+    <!-- Show error message if login fails -->
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <form th:action="@{/teacher/login}" method="post">
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don’t have an account? <a th:href="@{/teacher/signup}">Sign Up</a></p>
+</div>
+</body>
+</html>

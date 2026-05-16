@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students List</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Teacher Panel</h2>
+    <a href="/teacher/dashboard">🏠 Dashboard</a>
+    <a href="/teacher/attendance">📅 Attendance</a>
+    <a href="/teacher/absent">❌ Absences</a>
+    <a href="/teacher/marks">📊 Marks</a>
+   <a href="/teacher/subjects">📘 Subjects</a>
+    <a href="/teacher/students" class="active">👨‍🎓 Students</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>All Students</h2>
+        <p>View registered students under your guidance</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.studentId}">STUD001</td>
+                    <td th:text="${student.name}">John Doe</td>
+                    <td th:text="${student.email}">john@example.com</td>
+                    <td th:text="${student.className}">10-A</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

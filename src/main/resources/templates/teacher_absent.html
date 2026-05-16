@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Absentees</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Teacher Panel</h2>
+    <a href="/teacher/dashboard">🏠 Dashboard</a>
+    <a href="/teacher/attendance">📅 Attendance</a>
+    <a href="/teacher/absent" class="active">❌ Absences</a>
+    <a href="/teacher/marks">📊 Marks</a>
+    <a href="/teacher/subjects">📘 Subjects</a>
+    <a href="/teacher/notices">✉ Notices</a>
+    <a href="/teacher/students">👨‍🎓 Students</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>Absent Student Records</h2>
+        <p>Track and manage absentee details</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="absent : ${absentList}">
+                    <td th:text="${absent.studentId}">STUD001</td>
+                    <td th:text="${absent.studentName}">John Doe</td>
+                    <td th:text="${absent.date}">2025-09-21</td>
+                    <td th:text="${absent.reason}">Sick</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

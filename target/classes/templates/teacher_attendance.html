@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Attendance</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f9ff;
+            color: #1e3c72;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: #1e3c72;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #2a5298;
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background: #2a5298;
+        }
+
+        /* Form & Main content */
+        form {
+    margin-left: 240px; /* keeps space for sidebar */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    
+    width: calc(100% - 240px); /* fill the remaining space */
+    max-width: none; /* remove 800px limit */
+    margin-top: 20px;
+}
+        
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="date"], select {
+            padding: 8px 10px;
+            border: 1px solid #1e3c72;
+            border-radius: 6px;
+            margin: 10px 0 20px 0;
+            width: 100%;
+            outline: none;
+        }
+
+        input[type="date"]:focus, select:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 5px #2a5298;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background: #1e3c72;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        /* Button styling */
+        .form-actions {
+            text-align: right;
+        }
+
+        button.btn-primary {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button.btn-primary:hover {
+            background: #2a5298;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+            form {
+                margin-left: 0;
+                padding: 15px;
+            }
+            table, tr, th, td {
+                display: block;
+                width: 100%;
+            }
+            th {
+                background: #1e3c72;
+                color: white;
+                padding: 10px;
+            }
+            td {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Teacher Panel</h2>
+    <a href="/teacher/dashboard">🏠 Dashboard</a>
+    <a href="/teacher/marks">📊 Marks</a>
+    <a href="/teacher/attendance" class="active">🙋🏻‍♂️ Attendance</a>
+    <a href="/teacher/subjects">📘 Subjects</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<form th:action="@{/teacher/attendance/submit}" method="post">
+    <label for="date">Date:</label>
+    <input type="date" name="date" id="date" required>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student, stat : ${students}">
+                <td>
+                    <input type="hidden" th:name="'Id'" th:value="${student.id}" />
+                    <span th:text="${student.studentId}"></span>
+                </td>
+                <td th:text="${student.name}"></td>
+                <td>
+                    <select th:name="'statusList'" required>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-primary">Save Attendance</button>
+    </div>
+</form>
+
+</body>
+</html>

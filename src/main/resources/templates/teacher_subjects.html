@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects Management</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f9ff;
+            color: #1e3c72;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: #1e3c72;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #2a5298;
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background: #2a5298;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 240px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .header {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border: 1px solid #1e3c72;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form-container input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 5px #2a5298;
+        }
+
+        .form-container button.btn-primary {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .form-container button.btn-primary:hover {
+            background: #2a5298;
+            transform: scale(1.05);
+        }
+
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background: #1e3c72;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            table, tr, th, td {
+                display: block;
+                width: 100%;
+            }
+            th {
+                background: #1e3c72;
+                color: white;
+                padding: 10px;
+            }
+            td {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <h2>Teacher Panel</h2>
+    <a href="/teacher/dashboard" class="active">🏠 Dashboard</a>
+    <a href="/teacher/marks">📊 Manage Marks</a>
+    <a href="/teacher/attendance">🙋🏻‍♂️ Attendance</a>
+    <a href="/teacher/subjects">📘 Subjects</a>
+    <a href="/">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <h2>Add Subject</h2>
+        <p>Enter Subject Name and Teacher Name</p>
+    </div>
+
+    <div class="form-container">
+        <form th:action="@{/teacher/subjects}" method="post">
+            <input type="text" name="subjectName" placeholder="Enter Subject Name" required>
+            <input type="text" name="teacherName" placeholder="Enter Teacher Name" required>
+            <button type="submit" class="btn-primary">Add Subject</button>
+        </form>
+
+        <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+        <p th:if="${success}" th:text="${success}" style="color:green;"></p>
+    </div>
+
+    <div class="table-container">
+        <h3>Subjects List</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject ID</th>
+                    <th>Subject Name</th>
+                    <th>Teacher Name</th>
+                    <th>Teacher ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sub : ${subjects}">
+                    <td th:text="${sub.id}">1</td>
+                    <td th:text="${sub.name}">Math</td>
+                    <td th:text="${sub.teacherName}">Jesbel</td>
+                    <td th:text="${sub.teacherId}">1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
